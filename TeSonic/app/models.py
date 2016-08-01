@@ -46,7 +46,7 @@ class TestCase(db.Model):
     name = db.Column(db.String(64))
 
 
-class TestPlan(db.Module):
+class TestPlan(db.Model):
     __tablename__='testplans'
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(64))
