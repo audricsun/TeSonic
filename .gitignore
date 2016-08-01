@@ -3,8 +3,10 @@ PyEnv
 *.pyc
 # IDE config file
 .idea
-*.ini
+.vscode
 
+*.ini
+*.json
 #log Files
 *.log
 
