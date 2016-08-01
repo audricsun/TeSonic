@@ -1,0 +1,10 @@
+PyEnv
+
+*.pyc
+
+#log Files
+*.log
+
+#trash Data
+*.xls
+*.xlsx
