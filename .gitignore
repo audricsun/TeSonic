@@ -1,8 +1,9 @@
 PyEnv
-
+#Python compile file
 *.pyc
-
+# IDE config file
 .idea
+*.ini
 
 #log Files
 *.log
@@ -10,3 +11,7 @@ PyEnv
 #trash Data
 *.xls
 *.xlsx
+
+#Sql related
+*.sqlite
+
