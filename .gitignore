@@ -4,7 +4,7 @@ PyEnv
 # IDE config file
 .idea
 *.ini
-
+*.json
 #log Files
 *.log
 
