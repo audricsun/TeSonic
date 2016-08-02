@@ -4,9 +4,8 @@ PyEnv
 # IDE config file
 .idea
 .vscode
+migrations
 
-*.ini
-*.json
 #log Files
 *.log
 
