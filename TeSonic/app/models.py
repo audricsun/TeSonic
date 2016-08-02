@@ -41,12 +41,27 @@ def load_user(user_id):
 
 
 class TestCase(db.Model):
-    __tablename__='testcases'
+    __tablename__='test_cases'
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(64))
 
 
 class TestPlan(db.Model):
-    __tablename__='testplans'
+    __tablename__='test_plans'
+    id = db.Column(db.Integer,primary_key=True)
+    name = db.Column(db.String(64))
+
+class Product(db.Model):
+    __tablename__='products'
+    id = db.Column(db.Integer,primary_key=True)
+    name = db.Column(db.String(64))
+
+class TestStep(db.Model):
+    __tablename__='test_steps'
+    id = db.Column(db.Integer,primary_key=True)
+    name = db.Column(db.String(64))
+
+class TestResult(db.Model):
+    __tablename__='test_results'
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(64))
