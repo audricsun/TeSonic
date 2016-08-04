@@ -44,24 +44,42 @@ class TestCase(db.Model):
     __tablename__='test_cases'
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(64))
+    version = db.Column(db.Integer)
+    ctime = db.Column(db.DateTime)
+    utime = db.Column(db.DateTime)
 
 
 class TestPlan(db.Model):
     __tablename__='test_plans'
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(64))
+    ctime = db.Column(db.DateTime)
+    utime = db.Column(db.DateTime)
 
 class Product(db.Model):
     __tablename__='products'
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(64))
+    ctime = db.Column(db.DateTime)
+    utime = db.Column(db.DateTime)
 
 class TestStep(db.Model):
     __tablename__='test_steps'
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(64))
+    ctime = db.Column(db.DateTime)
+    utime = db.Column(db.DateTime)
 
 class TestResult(db.Model):
     __tablename__='test_results'
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(64))
+    ctime = db.Column(db.DateTime)
+    utime = db.Column(db.DateTime)
+
+class TestSuites(db.Model):
+    __tablename__='test_suits'
+    id = db.Column(db.Integer,primary_key=True)
+    name = db.Column(db.String(64))
+    ctime = db.Column(db.DateTime)
+    utime = db.Column(db.DateTime)
