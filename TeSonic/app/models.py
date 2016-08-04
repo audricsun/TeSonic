@@ -1,7 +1,7 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask.ext.login import UserMixin
 from . import db, login_manager
-
+from datetime import datetime
 
 class Role(db.Model):
     __tablename__ = 'roles'
@@ -39,47 +39,54 @@ class User(UserMixin, db.Model):
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+class Product(db.Model):
+    __tablename__='products'
+    id = db.Column(db.Integer,primary_key=True)
+    productName = db.Column(db.String(64))
+    desc = db.Column(db.String(64))
+    ctime = db.Column(db.DateTime, default=datetime.now)
+    utime = db.Column(db.DateTime, onupdate=datetime.now)
 
 class TestCase(db.Model):
     __tablename__='test_cases'
     id = db.Column(db.Integer,primary_key=True)
-    name = db.Column(db.String(64))
+    title = db.Column(db.String(64))
+    desc = db.Column(db.String(64))
+    expect = db.Column(db.String(64))
+    hasDetail= db.Column(db.Integer)
+    parentCaseId = db.Column(db.Integer)
+    productID = db.Column(db.Integer)
     version = db.Column(db.Integer)
-    ctime = db.Column(db.DateTime)
-    utime = db.Column(db.DateTime)
+    ctime = db.Column(db.DateTime,default=datetime.now)
+    utime = db.Column(db.DateTime,onupdate=datetime.now)
 
 
 class TestPlan(db.Model):
     __tablename__='test_plans'
     id = db.Column(db.Integer,primary_key=True)
-    name = db.Column(db.String(64))
-    ctime = db.Column(db.DateTime)
-    utime = db.Column(db.DateTime)
+    title = db.Column(db.String(64))
+    productID = db.Column(db.Integer)
+    desc = db.Column(db.String(64))
+    ctime = db.Column(db.DateTime, default=datetime.now)
+    utime = db.Column(db.DateTime, onupdate=datetime.now)
 
-class Product(db.Model):
-    __tablename__='products'
-    id = db.Column(db.Integer,primary_key=True)
-    name = db.Column(db.String(64))
-    ctime = db.Column(db.DateTime)
-    utime = db.Column(db.DateTime)
 
 class TestStep(db.Model):
     __tablename__='test_steps'
     id = db.Column(db.Integer,primary_key=True)
-    name = db.Column(db.String(64))
-    ctime = db.Column(db.DateTime)
-    utime = db.Column(db.DateTime)
+    testCaseId = db.Column(db.Integer)
+    desc = db.Column(db.String(64))
+    expect = db.Column(db.String(64))
+    ctime = db.Column(db.DateTime, default=datetime.now)
+    utime = db.Column(db.DateTime, onupdate=datetime.now)
 
 class TestResult(db.Model):
     __tablename__='test_results'
     id = db.Column(db.Integer,primary_key=True)
-    name = db.Column(db.String(64))
-    ctime = db.Column(db.DateTime)
-    utime = db.Column(db.DateTime)
+    TestPlanid = db.Column(db.Integer)
+    testCaseId = db.Column(db.Integer)
+    testStepId = db.Column(db.Integer)
+    result = db.Column(db.Integer)
+    ctime = db.Column(db.DateTime, default=datetime.now)
+    utime = db.Column(db.DateTime, onupdate=datetime.now)
 
-class TestSuites(db.Model):
-    __tablename__='test_suits'
-    id = db.Column(db.Integer,primary_key=True)
-    name = db.Column(db.String(64))
-    ctime = db.Column(db.DateTime)
-    utime = db.Column(db.DateTime)
