@@ -20,4 +20,24 @@ I hope i can finish this and achive my blueprint totally.
 9. python manager.py db upgrade
 10. python manager.py runserver
 
+# Basic Blueprint 
+## Home
+### Opening Plans
+### Opening Products
+
+## Dashboard
+### Open Cases
+### Finished Cases
+
+## Product
+
+## Plan
+
+## Case
+
+## Report
+### Cross-query on Testcase and test plan
+
+
+
 # Prepare to meet an empty website just like a tutorial demo...

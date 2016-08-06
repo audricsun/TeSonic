@@ -1,6 +1,6 @@
 {% extends "bootstrap/base.html" %}
 
-{% block title %}Flasky{% endblock %}
+{% block title %}TeSonic{% endblock %}
 
 {% block head %}
 {{ super() }}
@@ -23,7 +23,10 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Test Cases</a></li>
+                <li><a href="#">Product</a></li>
+                <li><a href="#">TestPlan</a></li>
+                <li><a href="#">TestCase</a></li>
+                <li><a href="#">Reports</a></li>
                 <li><a href="{{ url_for('manager.importFile') }}">Manager</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
