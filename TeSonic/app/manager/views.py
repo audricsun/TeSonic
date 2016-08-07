@@ -11,6 +11,7 @@ def importFile():
     if form.validate_on_submit():
         flash("importing file")
         flash(form.file.data)
+        print form.file
     return render_template('manager/import.html', form=form)
 
 
