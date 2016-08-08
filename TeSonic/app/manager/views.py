@@ -20,3 +20,8 @@ def y():
    if request.is_xhr:
        return jsonify({'count':'5'})
    return render_template('manager/ajax.html')
+
+
+@manager.route('/bootstrap')
+def bootstrapDemo():
+   return render_template('manager/bootstrap.html')
