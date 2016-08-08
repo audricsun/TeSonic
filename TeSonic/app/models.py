@@ -90,3 +90,23 @@ class TestResult(db.Model):
     ctime = db.Column(db.DateTime, default=datetime.now)
     utime = db.Column(db.DateTime, onupdate=datetime.now)
 
+
+class TestPolicy(db.Model):
+    __tablename__='test_policy'
+    id = db.Column(db.Integer,primary_key=True)
+    TestPlanid = db.Column(db.Integer)
+    testCaseId = db.Column(db.Integer)
+    testStepId = db.Column(db.Integer)
+    result = db.Column(db.Integer)
+    ctime = db.Column(db.DateTime, default=datetime.now)
+    utime = db.Column(db.DateTime, onupdate=datetime.now)
+
+class Request(db.Model):
+    __tablename__='test_request'
+    id = db.Column(db.Integer,primary_key=True)
+    TestPlanid = db.Column(db.Integer)
+    testCaseId = db.Column(db.Integer)
+    testStepId = db.Column(db.Integer)
+    result = db.Column(db.Integer)
+    ctime = db.Column(db.DateTime, default=datetime.now)
+    utime = db.Column(db.DateTime, onupdate=datetime.now)
