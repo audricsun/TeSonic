@@ -23,11 +23,33 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Product</a></li>
-                <li><a href="#">TestPlan</a></li>
-                <li><a href="#">TestCase</a></li>
-                <li><a href="#">Reports</a></li>
-                <li><a href="{{ url_for('manager.importFile') }}">Manager</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+                                role="button" aria-haspopup="true" 
+                                aria-expanded="false">Library <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Requests</a></li>
+                        <li><a href="#">Policy</a></li>
+                        <li><a href="#">TestCases</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Wizards</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="{{ url_for('manager.importFile') }}">Import</a></li>
+                        <li><a href="#">Export</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+                                role="button" aria-haspopup="true" 
+                                aria-expanded="false">Cycles <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Test Plans</a></li>
+                        <li><a href="#">Apply Testcase</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Execute</a></li>
+                <li><a href="#">Charts</a></li>
+                
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated %}
