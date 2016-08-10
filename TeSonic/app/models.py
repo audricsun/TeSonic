@@ -39,6 +39,7 @@ class User(UserMixin, db.Model):
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+#TODO: add test method for models
 class Product(db.Model):
     __tablename__='products'
     id = db.Column(db.Integer,primary_key=True)

@@ -20,23 +20,29 @@ I hope i can finish this and achive my blueprint totally.
 9. python manager.py db upgrade
 10. python manager.py runserver
 
-# Basic Blueprint 
+# Basic Structure Blueprint
 ## Home
-### Opening Plans
-### Opening Products
+1. Display Opening Plans
+2. Display Opening Products
+3. Display some charts
 
 ## Dashboard
-### Open Cases
-### Finished Cases
+1. Open Cases
+2. Finished Cases
 
 ## Product
 
+
 ## Plan
 
-## Case
+## Library
+1. Display test case tree
+2. Maintain all test cases about current product
+
+
 
 ## Report
-### Cross-query on Testcase and test plan
+1. Cross-query on Testcase and test plan
 
 
 
