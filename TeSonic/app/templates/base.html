@@ -54,6 +54,14 @@
                 
             </ul>
             <ul class="nav navbar-nav navbar-right">
+
+                <!-- Search Holder -->
+                <form class="navbar-form navbar-left" role="search">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                  </div>
+                </form>
+                <!-- end -->
                 {% if current_user.is_authenticated %}
                 <li><a href="#">Account</a></li>
                 <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
