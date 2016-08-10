@@ -1,7 +1,4 @@
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask.ext.login import UserMixin
-from . import db, login_manager
-from datetime import datetime
+from . import *
 
 class Role(db.Model):
     __tablename__ = 'roles'
