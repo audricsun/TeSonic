@@ -1,7 +1,4 @@
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask.ext.login import UserMixin
-from . import db, login_manager
-
+from . import *
 
 class Role(db.Model):
     __tablename__ = 'roles'
@@ -11,7 +8,6 @@ class Role(db.Model):
 
     def __repr__(self):
         return '<Role %r>' % self.name
-
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
@@ -33,35 +29,13 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
 
     def __repr__(self):
-        return '<User %r>' % self.username
+        return '<User %r Email %r>' % (self.username,self.email)
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-class TestCase(db.Model):
-    __tablename__='test_cases'
-    id = db.Column(db.Integer,primary_key=True)
-    name = db.Column(db.String(64))
 
 
-class TestPlan(db.Model):
-    __tablename__='test_plans'
-    id = db.Column(db.Integer,primary_key=True)
-    name = db.Column(db.String(64))
 
-class Product(db.Model):
-    __tablename__='products'
-    id = db.Column(db.Integer,primary_key=True)
-    name = db.Column(db.String(64))
-
-class TestStep(db.Model):
-    __tablename__='test_steps'
-    id = db.Column(db.Integer,primary_key=True)
-    name = db.Column(db.String(64))
-
-class TestResult(db.Model):
-    __tablename__='test_results'
-    id = db.Column(db.Integer,primary_key=True)
-    name = db.Column(db.String(64))
