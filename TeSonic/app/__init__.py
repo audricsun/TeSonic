@@ -33,7 +33,10 @@ def create_app(config_name):
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
-    from .manager import manager as manager_blueprint
-    app.register_blueprint(manager_blueprint,url_prefix='/manager')
+    from .library import library as library_blueprint
+    app.register_blueprint(library_blueprint,url_prefix='/library')
+
+    from .cycles import cycles as cycles_blueprint
+    app.register_blueprint(cycles_blueprint, url_prefix='/cycles')
 
     return app
