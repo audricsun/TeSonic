@@ -1,7 +1,7 @@
 from flask import render_template, redirect, request, url_for, flash ,jsonify
 from flask.ext.login import login_user, logout_user, login_required
 from . import library
-from ..models import User
+from ..models import Product
 from .forms import ImportForm
 
 
@@ -14,6 +14,20 @@ def importFile():
         flash(form.file.data)
         print form.file
     return render_template('library/import.html', form=form)
+
+@library.route('/product',methods=['GET', 'POST'])
+def productPage():
+    products = Product.query.all()
+    return render_template('library/product.html',products=products)
+
+@library.route('/request',methods=['GET', 'POST'])
+def requestPage():
+    return render_template('library/request.html')
+
+@library.route('/strategy',methods=['GET', 'POST'])
+def strategyPage():
+    return render_template('library/strategy.html')
+
 
 
 @library.route('/ajax')

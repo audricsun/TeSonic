@@ -28,9 +28,9 @@
                                 role="button" aria-haspopup="true" 
                                 aria-expanded="false">Library <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Products</a></li>
-                        <li><a href="#">Requests</a></li>
-                        <li><a href="#">Strategy</a></li>
+                        <li><a href="{{ url_for('library.productPage') }}">Products</a></li>
+                        <li><a href="{{ url_for('library.requestPage') }}">Requests</a></li>
+                        <li><a href="{{ url_for('library.strategyPage') }}">Strategy</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#">TestCases</a></li>
                         <li><a href="#">Wizard</a></li>

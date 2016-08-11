@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Products{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>Hello, {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}Visitor{% endif %}!</h1>
+    <h2>Product Page</h2>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Create Time</th>
+          <th>Product</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+            {% for product in products %}
+            <tr>
+                <th scope="row">{{ product.id }}</th>
+                <td>{{ moment(product.ctime).fromNow() }}</td>
+                <td>{{ product.productName }}</td>
+                <td>{{ product.desc }}</td>
+            </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}

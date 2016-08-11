@@ -8,9 +8,25 @@ class Product(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     productName = db.Column(db.String(64))
     desc = db.Column(db.String(64))
-
     ctime = db.Column(db.DateTime, default=datetime.now)
     utime = db.Column(db.DateTime, onupdate=datetime.now)
+
+    @staticmethod
+    def makeFakeData(n=10):
+        from sqlalchemy.exc import IntegrityError
+        from random import seed
+        import forgery_py
+
+        seed()
+        for i in range(n):
+            p = Product(productName = forgery_py.forgery.personal.language(),
+                        desc = forgery_py.basic.text(50,5))
+            db.session.add(p)
+            try:
+                db.session.commit()
+            except IntegrityError:
+                db.session.rollback()
+
 
 
 class Request(db.Model):
@@ -58,4 +74,12 @@ class TestCase(db.Model):
     ctime = db.Column(db.DateTime,default=datetime.now)
     utime = db.Column(db.DateTime,onupdate=datetime.now)
 
+class TeamMapper(db.Model):
+    __tablename__="team_mapper"
+    id = db.Column(db.Integer,primary_key=True)
+    product_id = db.Column(db.Integer)
+    user_id = db.Column(db.Integer)
+    role_id = db.Column(db.Integer)
+    ctime = db.Column(db.DateTime,default=datetime.now)
+    utime = db.Column(db.DateTime,onupdate=datetime.now)
     
