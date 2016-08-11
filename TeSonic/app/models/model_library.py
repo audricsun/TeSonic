@@ -8,6 +8,7 @@ class Product(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     productName = db.Column(db.String(64))
     desc = db.Column(db.String(64))
+
     ctime = db.Column(db.DateTime, default=datetime.now)
     utime = db.Column(db.DateTime, onupdate=datetime.now)
 
