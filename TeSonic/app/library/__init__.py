@@ -1,5 +1,5 @@
 from flask import Blueprint
 
-manager = Blueprint('manager', __name__)
+library = Blueprint('library', __name__)
 
 from . import views
