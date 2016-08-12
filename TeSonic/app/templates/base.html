@@ -92,7 +92,6 @@
   </div>
 </div>
 {% endblock %}
-
 {% block content %}
 <div class="container">
     {% for message in get_flashed_messages() %}
@@ -101,11 +100,9 @@
         {{ message }}
     </div>
     {% endfor %}
-
     {% block page_content %}{% endblock %}
 </div>
 {% endblock %}
-
 {% block scripts %}
 {{ super() }}
 {{ moment.include_moment() }}

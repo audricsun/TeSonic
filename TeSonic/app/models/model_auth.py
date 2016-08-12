@@ -17,6 +17,15 @@ class User(UserMixin, db.Model):
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     password_hash = db.Column(db.String(128))
 
+    @staticmethod
+    def addTestUser():
+        u = User(email = "abc@abc.com",
+                 username = 'evinoca',
+                 password = "123")
+        db.session.add(u)
+        db.session.commit()
+
+
     @property
     def password(self):
         raise AttributeError('password is not a readable attribute')
