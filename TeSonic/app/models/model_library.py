@@ -39,6 +39,16 @@ class Request(db.Model):
     ctime = db.Column(db.DateTime, default=datetime.now)
     utime = db.Column(db.DateTime, onupdate=datetime.now)
 
+class TeamMapper(db.Model):
+    __tablename__="team_mapper"
+    id = db.Column(db.Integer,primary_key=True)
+    product_id = db.Column(db.Integer)
+    user_id = db.Column(db.Integer)
+    role_id = db.Column(db.Integer)
+    ctime = db.Column(db.DateTime,default=datetime.now)
+    utime = db.Column(db.DateTime,onupdate=datetime.now)
+
+
 class TestStep(db.Model):
     __tablename__='test_steps'
     id = db.Column(db.Integer,primary_key=True)
@@ -74,12 +84,5 @@ class TestCase(db.Model):
     ctime = db.Column(db.DateTime,default=datetime.now)
     utime = db.Column(db.DateTime,onupdate=datetime.now)
 
-class TeamMapper(db.Model):
-    __tablename__="team_mapper"
-    id = db.Column(db.Integer,primary_key=True)
-    product_id = db.Column(db.Integer)
-    user_id = db.Column(db.Integer)
-    role_id = db.Column(db.Integer)
-    ctime = db.Column(db.DateTime,default=datetime.now)
-    utime = db.Column(db.DateTime,onupdate=datetime.now)
+
     
