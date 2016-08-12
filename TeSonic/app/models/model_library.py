@@ -32,10 +32,10 @@ class Product(db.Model):
 class Request(db.Model):
     __tablename__='test_request'
     id = db.Column(db.Integer,primary_key=True)
-    TestPlanid = db.Column(db.Integer)
-    testCaseId = db.Column(db.Integer)
-    testStepId = db.Column(db.Integer)
-    result = db.Column(db.Integer)
+    product_id = db.Column(db.Integer)
+    request_Name = db.Column(db.String(64))
+    request_Desc = db.Column(db.String(64))
+    request_Priority = db.Column(db.Integer)
     ctime = db.Column(db.DateTime, default=datetime.now)
     utime = db.Column(db.DateTime, onupdate=datetime.now)
 
