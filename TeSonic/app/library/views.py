@@ -1,11 +1,11 @@
-from flask import render_template, redirect, request, url_for, flash ,jsonify
+from flask import render_template, redirect, request, url_for, flash, jsonify, abort
 from flask.ext.login import login_user, logout_user, login_required
 from . import library
 from ..models import Product
 from .forms import ImportForm
 
 
-@library.route('/import',methods=['GET', 'POST'])
+@library.route('/import', methods=['GET', 'POST'])
 def importFile():
     form = ImportForm()
     if form.validate_on_submit():
@@ -15,28 +15,39 @@ def importFile():
         print form.file
     return render_template('library/import.html', form=form)
 
-@library.route('/product',methods=['GET', 'POST'])
+
+@library.route('/product_list', methods=['GET', 'POST'])
 def productPage():
     products = Product.query.all()
-    return render_template('library/product.html',products=products)
+    return render_template('library/productListPage.html', products=products)
 
-@library.route('/request',methods=['GET', 'POST'])
+
+@library.route('/productDetail/', methods=['GET', 'POST'])
+def productDetail():
+    productName = request.args.get('productName')
+    product = Product.query.filter_by(productName=productName).first()
+    if product is None:
+        abort(404)
+    return render_template('library/productDetailPage.html', product=product)
+
+
+@library.route('/request', methods=['GET', 'POST'])
 def requestPage():
-    return render_template('library/request.html')
+    return render_template('library/requestListPage.html')
 
-@library.route('/strategy',methods=['GET', 'POST'])
+
+@library.route('/strategy', methods=['GET', 'POST'])
 def strategyPage():
-    return render_template('library/strategy.html')
-
+    return render_template('library/strategyListPage.html')
 
 
 @library.route('/ajax')
 def y():
-   if request.is_xhr:
-       return jsonify({'count':'5'})
-   return render_template('library/ajax.html')
+    if request.is_xhr:
+        return jsonify({'count': '5'})
+    return render_template('library/ajax.html')
 
 
 @library.route('/bootstrap')
 def bootstrapDemo():
-   return render_template('library/bootstrap.html')
+    return render_template('library/bootstrap.html')

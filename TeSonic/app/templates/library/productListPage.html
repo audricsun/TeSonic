@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Products{% endblock %}
+{% block page_content %}
+<div class="row">
+    <div><h4>Product Page</h4></div>
+    <div class="row">
+        <div class="col-md-2">
+            <ul class="nav nav-list">
+                <li class="nav-header"><h1>Library</h1></li>
+                <li class="active"><a href="#">Product</a></li>
+                <li><a href="#">Request</a></li>
+                <li><a href="#">Strategy</a></li>
+
+            </ul>
+        </div>
+        <div class="col-md-10">
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Product</th>
+                    <th>Description</th>
+                    <th>Create Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for product in products %}
+                <tr>
+                    <th scope="row">{{ product.id }}</th>
+                    <td><a href="{{ url_for('library.productDetail')}}?productName={{product.productName }}">{{product.productName }}</a></td>
+                    <td>{{ product.desc }}</td>
+                    <td>{{ moment(product.ctime).fromNow() }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
