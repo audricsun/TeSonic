@@ -12,7 +12,7 @@ class Product(db.Model):
     utime = db.Column(db.DateTime, onupdate=datetime.now)
 
     @staticmethod
-    def makeFakeData(n=10):
+    def fake(n=10):
         from sqlalchemy.exc import IntegrityError
         from random import seed
         import forgery_py
@@ -33,11 +33,29 @@ class Request(db.Model):
     __tablename__='test_request'
     id = db.Column(db.Integer,primary_key=True)
     product_id = db.Column(db.Integer)
-    request_Name = db.Column(db.String(64))
-    request_Desc = db.Column(db.String(64))
-    request_Priority = db.Column(db.Integer)
+    name = db.Column(db.String(64))
+    desc = db.Column(db.String(64))
+    priority = db.Column(db.Integer)
+    
+    status = db.Column(db.Integer)
     ctime = db.Column(db.DateTime, default=datetime.now)
     utime = db.Column(db.DateTime, onupdate=datetime.now)
+
+    @staticmethod
+    def fake(n=10):
+        from sqlalchemy.exc import IntegrityError
+        from random import seed
+        import forgery_py
+
+        seed()
+        for i in range(n):
+            p = Request(name = forgery_py.forgery.personal.language(),
+                        desc = forgery_py.basic.text(50,5))
+            db.session.add(p)
+            try:
+                db.session.commit()
+            except IntegrityError:
+                db.session.rollback()
 
 class TeamMapper(db.Model):
     __tablename__="team_mapper"

@@ -13,7 +13,7 @@ $(function () {
 	    },
 
 	    pane: {
-	    	size: '90%'
+	    	size: '85%'
 	    },
 
 	    xAxis: {

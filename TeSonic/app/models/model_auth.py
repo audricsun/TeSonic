@@ -18,7 +18,7 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
 
     @staticmethod
-    def addTestUser():
+    def testUser():
         u = User(email = "abc@abc.com",
                  username = 'evinoca',
                  password = "123")
