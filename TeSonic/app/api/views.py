@@ -33,15 +33,16 @@ class TodoItem(Resource):
         return {'task': 'Say "Hello, World!"'}
 
 
-parser = reqparse.RequestParser()
-parser.add_argument('product_Name',required=True,help='A Product Name is Required')
-class Products(Resource):
+
+class ProductItem(Resource):
+    parser = reqparse.RequestParser()
+    parser.add_argument('product_Name', required=True, help='A Product Name is Required')
     def get(self,id):
         product = Product.query.filter_by(id = id).first()
         return product.productName
 
     def put(self,id):
-        args = parser.parse_args()
+        args = self.parser.parse_args()
         product = Product.query.filter_by(id=id).first()
         print product
         product.productName = args['product_Name']
@@ -51,7 +52,33 @@ class Products(Resource):
         return product.productName
 
 
+class ProductList(Resource):
+    parser = reqparse.RequestParser()
+    parser.add_argument('name', required=True, help='Name is Required')
+    parser.add_argument('desc', required=True, help='desc is Required')
+    parser.add_argument('type', required=True, help='type is Required')
+    parser.add_argument('owner', required=True, help='owner is Required')
+    def post(self):
+        args = self.parser.parse_args()
+        print args
+        name = args['name']
+        product = Product.query.filter_by(productName=name).first()
+        if product == None:
+            p = Product(productName = name,
+                        desc = args['desc'],
+                        type = args['type'],
+                        #TODO: change this either
+                        Owner = args['owner'])
+            db.session.add(p)
+            db.session.commit()
+            return "success"
+        else:
+            return "Duplicated"
+
+
 
 #Add resource
+
 api_Resource.add_resource(TodoItem, '/todos/<int:id>')
-api_Resource.add_resource(Products, '/products/<int:id>')
+api_Resource.add_resource(ProductItem, '/product/<int:id>')
+api_Resource.add_resource(ProductList, '/products')

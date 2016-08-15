@@ -16,6 +16,8 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), unique=True, index=True)
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     password_hash = db.Column(db.String(128))
+    ctime = db.Column(db.DateTime, default=datetime.now)
+    utime = db.Column(db.DateTime, onupdate=datetime.now)
 
     @staticmethod
     def fakeAdmin():

@@ -2,7 +2,7 @@ from flask import render_template, redirect, request, url_for, flash, jsonify, a
 from flask.ext.login import login_user, logout_user, login_required
 from . import library
 from ..models import Product
-from .forms import ImportForm
+from .forms import ImportForm,NewProduct
 
 
 @library.route('/import', methods=['GET', 'POST'])
@@ -18,8 +18,9 @@ def importFile():
 
 @library.route('/product_list', methods=['GET', 'POST'])
 def productPage():
-    products = Product.query.all()
-    return render_template('library/productListPage.html', products=products)
+    products = Product.query.order_by(Product.ctime.desc()).all()
+    form = NewProduct()
+    return render_template('library/productListPage.html', products=products,form = form)
 
 
 @library.route('/productDetail/', methods=['GET', 'POST'])

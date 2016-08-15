@@ -8,3 +8,10 @@ class ImportForm(Form):
     file = FileField('')
     enable = BooleanField('Publish After Import')
     submit = SubmitField('Import')
+
+
+class NewProduct(Form):
+    name = StringField('Product Name', validators=[Required(), Length(1, 64)])
+    desc = TextAreaField('Brief Description')
+    type = TextAreaField('Product Type')
+    owner = TextAreaField('Product Owner')

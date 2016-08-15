@@ -5,7 +5,9 @@ from flask.ext.login import login_user, logout_user, login_required
 
 @main.route('/')
 def index():
-    return render_template('index.html')
+    from datetime import datetime
+
+    return render_template('index.html', current_time=datetime.utcnow())
 
 @main.route('/dashboard')
 @login_required

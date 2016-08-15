@@ -8,6 +8,9 @@ class Product(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     productName = db.Column(db.String(64))
     desc = db.Column(db.String(64))
+    type = db.Column(db.Integer)
+    #TODO: Modify This Column Name
+    Owner = db.Column(db.Integer)
     ctime = db.Column(db.DateTime, default=datetime.now)
     utime = db.Column(db.DateTime, onupdate=datetime.now)
 
@@ -36,7 +39,7 @@ class Request(db.Model):
     name = db.Column(db.String(64))
     desc = db.Column(db.String(64))
     priority = db.Column(db.Integer)
-    
+    owner = db.Column(db.Integer)
     status = db.Column(db.Integer)
     ctime = db.Column(db.DateTime, default=datetime.now)
     utime = db.Column(db.DateTime, onupdate=datetime.now)
@@ -44,14 +47,17 @@ class Request(db.Model):
     @staticmethod
     def fake(n=10):
         from sqlalchemy.exc import IntegrityError
-        from random import seed
+        from random import seed,randint
         import forgery_py
 
         seed()
-        for i in range(n):
-            p = Request(name = forgery_py.forgery.personal.language(),
+        product_count = Product.query.count()
+        for i in range(n*product_count):
+            product = Product.query.offset(randint(0, product_count - 1)).first()
+            request = Request(product_id = product.id,
+                        name = forgery_py.forgery.personal.language(),
                         desc = forgery_py.basic.text(50,5))
-            db.session.add(p)
+            db.session.add(request)
             try:
                 db.session.commit()
             except IntegrityError:
