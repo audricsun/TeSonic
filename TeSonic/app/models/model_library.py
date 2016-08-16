@@ -11,8 +11,8 @@ class Product(db.Model):
     type = db.Column(db.Integer)
     #TODO: Modify This Column Name
     Owner = db.Column(db.Integer)
-    ctime = db.Column(db.DateTime, default=datetime.now)
-    utime = db.Column(db.DateTime, onupdate=datetime.now)
+    ctime = db.Column(db.DateTime, default=datetime.utcnow)
+    utime = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
     @staticmethod
     def fake(n=10):
@@ -41,8 +41,8 @@ class Request(db.Model):
     priority = db.Column(db.Integer)
     owner = db.Column(db.Integer)
     status = db.Column(db.Integer)
-    ctime = db.Column(db.DateTime, default=datetime.now)
-    utime = db.Column(db.DateTime, onupdate=datetime.now)
+    ctime = db.Column(db.DateTime, default=datetime.utcnow)
+    utime = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
     @staticmethod
     def fake(n=10):
@@ -69,8 +69,8 @@ class TeamMapper(db.Model):
     product_id = db.Column(db.Integer)
     user_id = db.Column(db.Integer)
     role_id = db.Column(db.Integer)
-    ctime = db.Column(db.DateTime,default=datetime.now)
-    utime = db.Column(db.DateTime,onupdate=datetime.now)
+    ctime = db.Column(db.DateTime,default=datetime.utcnow)
+    utime = db.Column(db.DateTime,onupdate=datetime.utcnow)
 
 
 class TestStep(db.Model):
@@ -79,8 +79,8 @@ class TestStep(db.Model):
     testCaseId = db.Column(db.Integer)
     desc = db.Column(db.String(64))
     expect = db.Column(db.String(64))
-    ctime = db.Column(db.DateTime, default=datetime.now)
-    utime = db.Column(db.DateTime, onupdate=datetime.now)
+    ctime = db.Column(db.DateTime, default=datetime.utcnow)
+    utime = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
 
 class TestPolicy(db.Model):
@@ -90,8 +90,8 @@ class TestPolicy(db.Model):
     testCaseId = db.Column(db.Integer)
     testStepId = db.Column(db.Integer)
     result = db.Column(db.Integer)
-    ctime = db.Column(db.DateTime, default=datetime.now)
-    utime = db.Column(db.DateTime, onupdate=datetime.now)
+    ctime = db.Column(db.DateTime, default=datetime.utcnow)
+    utime = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
 
 
@@ -105,8 +105,8 @@ class TestCase(db.Model):
     parentCaseId = db.Column(db.Integer)
     productID = db.Column(db.Integer)
     version = db.Column(db.Integer)
-    ctime = db.Column(db.DateTime,default=datetime.now)
-    utime = db.Column(db.DateTime,onupdate=datetime.now)
+    ctime = db.Column(db.DateTime,default=datetime.utcnow)
+    utime = db.Column(db.DateTime,onupdate=datetime.utcnow)
 
 
     

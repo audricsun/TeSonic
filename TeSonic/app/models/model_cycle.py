@@ -1,17 +1,14 @@
 from . import *
 
 
-
-
-
 class TestPlan(db.Model):
     __tablename__='test_plans'
     id = db.Column(db.Integer,primary_key=True)
     title = db.Column(db.String(64))
     productID = db.Column(db.Integer)
     desc = db.Column(db.String(64))
-    ctime = db.Column(db.DateTime, default=datetime.now)
-    utime = db.Column(db.DateTime, onupdate=datetime.now)
+    ctime = db.Column(db.DateTime, default=datetime.utcnow)
+    utime = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
 class TestCycle(db.Model):
     __tablename__='test_cycles'
@@ -19,8 +16,8 @@ class TestCycle(db.Model):
     title = db.Column(db.String(64))
     productID = db.Column(db.Integer)
     desc = db.Column(db.String(64))
-    ctime = db.Column(db.DateTime, default=datetime.now)
-    utime = db.Column(db.DateTime, onupdate=datetime.now)
+    ctime = db.Column(db.DateTime, default=datetime.utcnow)
+    utime = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
 
 class TestResult(db.Model):
@@ -30,5 +27,5 @@ class TestResult(db.Model):
     testCaseId = db.Column(db.Integer)
     testStepId = db.Column(db.Integer)
     result = db.Column(db.Integer)
-    ctime = db.Column(db.DateTime, default=datetime.now)
-    utime = db.Column(db.DateTime, onupdate=datetime.now)
+    ctime = db.Column(db.DateTime, default=datetime.utcnow)
+    utime = db.Column(db.DateTime, onupdate=datetime.utcnow)
