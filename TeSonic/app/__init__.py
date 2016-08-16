@@ -41,7 +41,5 @@ def create_app(config_name):
     from .library import library as library_blueprint
     app.register_blueprint(library_blueprint,url_prefix='/library')
 
-    from .cycles import cycles as cycles_blueprint
-    app.register_blueprint(cycles_blueprint, url_prefix='/cycles')
 
     return app
