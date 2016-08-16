@@ -10,7 +10,7 @@ class ImportForm(Form):
     submit = SubmitField('Import')
 
 
-class NewProduct(Form):
+class NewProductForm(Form):
     name = StringField('Product Name', validators=[Required(), Length(1, 64)])
     desc = TextAreaField('Brief Description')
     type = TextAreaField('Product Type')

@@ -6,11 +6,11 @@ from . import *
 class Product(db.Model):
     __tablename__='products'
     id = db.Column(db.Integer,primary_key=True)
-    productName = db.Column(db.String(64))
+    productName = db.Column(db.String(64), nullable=False,unique=True)
     desc = db.Column(db.String(64))
     type = db.Column(db.Integer)
-    #TODO: Modify This Column Name
-    Owner = db.Column(db.Integer)
+
+    owner = db.Column(db.Integer)
     ctime = db.Column(db.DateTime, default=datetime.utcnow)
     utime = db.Column(db.DateTime, onupdate=datetime.utcnow)
 

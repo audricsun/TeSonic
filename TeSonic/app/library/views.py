@@ -1,8 +1,8 @@
 from flask import render_template, redirect, request, url_for, flash, jsonify, abort
 from flask.ext.login import login_user, logout_user, login_required
 from . import library
-from ..models import Product
-from .forms import ImportForm,NewProduct
+from ..models import Product,db
+from .forms import ImportForm,NewProductForm
 
 
 @library.route('/import', methods=['GET', 'POST'])
@@ -18,9 +18,41 @@ def importFile():
 
 @library.route('/product_list', methods=['GET', 'POST'])
 def productPage():
+    from sqlalchemy.exc import IntegrityError
+    if request.is_xhr:
+        productName = request.form.get('name')
+        print productName
+        product = Product.query.filter_by(productName=productName).first()
+        p = Product(productName=request.form.get('name'),
+                    desc=request.form.get('desc'),
+                    type=request.form.get('type'),
+                    owner=request.form.get('owner'))
+        db.session.add(p)
+        try:
+            db.session.commit()
+            flash("Product is created")
+            return jsonify({'message': 'success'})
+        except IntegrityError:
+            db.session.rollback()
+            flash("Create Product Failed. Already Existed")
+            return jsonify({'message': 'Already Existed'}),403
+
     products = Product.query.order_by(Product.ctime.desc()).all()
-    form = NewProduct()
-    return render_template('library/productListPage.html', products=products,form = form)
+    return render_template('library/productListPage.html', products=products)
+
+@library.route('/create_product', methods=['POST'])
+def createProductByAjax():
+    form = NewProductForm()
+    print request.form.get('name')
+    if form.validate_on_submit():
+        flash("Form")
+    elif request.is_xhr:
+        flash("Have to do something")
+
+    else:
+        flash("nothing")
+    return "success",200
+
 
 
 @library.route('/productDetail/', methods=['GET', 'POST'])

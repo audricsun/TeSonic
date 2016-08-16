@@ -10,6 +10,6 @@ def index():
     return render_template('index.html', current_time=datetime.utcnow())
 
 @main.route('/dashboard')
-@login_required
+#@login_required
 def dashboard():
     return render_template('dashboard.html')

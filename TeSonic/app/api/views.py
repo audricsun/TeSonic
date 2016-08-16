@@ -3,6 +3,7 @@ from flask_restful import reqparse, abort, Api, Resource
 from flask.ext.login import login_user, logout_user, login_required
 from . import api
 from ..models import User,Product,db
+
 from .forms import LoginForm
 
 #Initial resource with restful-api
@@ -67,11 +68,10 @@ class ProductList(Resource):
             p = Product(productName = name,
                         desc = args['desc'],
                         type = args['type'],
-                        #TODO: change this either
-                        Owner = args['owner'])
+                        owner = args['owner'])
             db.session.add(p)
             db.session.commit()
-            return "success"
+
         else:
             return "Duplicated"
 
@@ -79,6 +79,6 @@ class ProductList(Resource):
 
 #Add resource
 
-api_Resource.add_resource(TodoItem, '/todos/<int:id>')
-api_Resource.add_resource(ProductItem, '/product/<int:id>')
-api_Resource.add_resource(ProductList, '/products')
+# api_Resource.add_resource(TodoItem, '/todos/<int:id>')
+# api_Resource.add_resource(ProductItem, '/product/<int:id>')
+# api_Resource.add_resource(ProductList, '/products')

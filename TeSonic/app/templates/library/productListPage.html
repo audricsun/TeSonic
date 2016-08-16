@@ -2,6 +2,10 @@
 {% import "bootstrap/wtf.html" as wtf %}
 {% block title %}Products{% endblock %}
 {% block page_content %}
+<div class="page-header">
+    <h1>Hello, {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}Visitor{% endif %}!</h1>
+    <p>This is a Product List</p>
+</div>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -58,7 +62,7 @@
 <div class="modal fade" id="create_new" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form method="POST" action="/api/products">
+            <form id="Add-New-Product-form" action="{{ url_for('library.createProductByAjax')}}"  method="POST" >
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
@@ -69,25 +73,25 @@
                         <div class="form-group">
                             <label for="name" class="col-sm-2 control-label">Name</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="name" placeholder="Product Name">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Product Name">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="desc" class="col-sm-2 control-label">Description</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="desc" placeholder="Description">
+                                <input type="text" class="form-control" id="desc" name="desc" placeholder="Description">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="type" class="col-sm-2 control-label">Type</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="type" placeholder="Type">
+                                <input type="text" class="form-control" id="type" name="type" placeholder="Type">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="owner" class="col-sm-2 control-label">Owner</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="owner" placeholder="Owner">
+                                <input type="text" class="form-control" id="owner" name = "owner" placeholder="Owner">
                             </div>
                         </div>
                     </div>
@@ -95,9 +99,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <input class="btn btn-primary" id="submit" name="submit" type="submit" value="Create">
+                    <!--<input class="btn btn-primary" id="submit" type="submit" value="Create">-->
+                    <button id ="createProductButton" type="submit" class="btn btn-primary" data-dismiss="modal">Create</button>
                 </div>
             </form>
+
         </div>
     </div>
 
@@ -106,7 +112,7 @@
 <div class="row">
     <div class="row">
         <div class="col-md-1">
-            </div>
+        </div>
 
         <div class="col-md-10">
 
@@ -136,7 +142,33 @@
 
         </div>
         <div class="col-md-1">
-            </div>
+        </div>
     </div>
 </div>
+{% endblock %}
+{% block scripts %}
+{{super()}}
+<script>
+            console.log($);
+            $(function(){
+               <!--$('Add-New-Product-form').on('submit', function(){-->
+               $('#createProductButton').click(function(){
+                    <!--e.preventDefault();-->
+                    $.ajax({
+                        url: "{{ url_for('library.productPage')}}",
+                        type: "POST",
+                        data: $("#Add-New-Product-form").serialize(),
+                        success: function(response) {
+                            console.log(response);
+                            location.reload();
+                        },
+                        error: function(error) {
+                            console.log(error);
+                            location.reload();
+                        }
+
+                    });
+               });
+            });
+            </script>
 {% endblock %}
